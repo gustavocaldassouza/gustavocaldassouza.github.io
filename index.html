@@ -4,232 +4,306 @@
   <meta charset="UTF-8">
   <title>Gustavo Caldas de Souza — Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Material Symbols for icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
   <style>
     :root {
-      --card-bg: #fff;
-      --focus-bg: #f5f7fa;
-      --border-radius: 16px;
+      --border-radius: 20px;
+      --background: #f7f9fa;
       --accent: #0071e3;
-      --shadow: 0 4px 24px rgba(112, 144, 176, 0.07);
-      --transition: 0.4s cubic-bezier(.78,.13,.15,.84);
+      --side-bg: #fff;
+      --shadow: 0 6px 38px rgba(87,114,144,0.08);
+      --side-shadow: 0 4px 18px rgba(200,210,220,0.07);
     }
     body {
       margin: 0;
-      background: #f8fafc;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: var(--background);
       color: #222;
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     }
     .nav {
+      background: var(--side-bg);
+      box-shadow: var(--side-shadow);
+      position: sticky;
+      top: 0;
       display: flex;
-      gap: 24px;
-      justify-content: center;
-      margin-top: 36px;
-      margin-bottom: 24px;
-      font-size: 1.1rem;
+      gap: 28px;
+      padding: 16px 0 16px 32px;
+      align-items: center;
+      z-index: 10;
     }
     .nav a {
-      position: relative;
-      color: #333;
+      color: #444;
       text-decoration: none;
       font-weight: 500;
-      transition: color var(--transition);
-      padding-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .3s;
     }
     .nav a.active,
     .nav a:hover {
       color: var(--accent);
     }
-    .nav a::after {
-      content: '';
-      display: block;
-      height: 2px;
-      width: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      transform: scaleX(0);
-      transition: transform var(--transition);
-      margin-top: 3px;
-    }
-    .nav a.active::after,
-    .nav a:hover::after {
-      transform: scaleX(1);
-    }
     .container {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 0 18px 80px 18px;
-    }
-    .section {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity var(--transition), transform var(--transition);
-      margin-bottom: 42px;
-    }
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .card {
-      background: var(--card-bg);
+      max-width: 950px;
+      margin: 40px auto;
+      background: var(--side-bg);
       border-radius: var(--border-radius);
       box-shadow: var(--shadow);
-      padding: 30px 26px;
-      margin-bottom: 24px;
-      transition: box-shadow var(--transition), background var(--transition), transform var(--transition);
-      will-change: box-shadow, background, transform;
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
     }
-    .card:hover {
-      background: var(--focus-bg);
-      box-shadow: 0 12px 40px rgba(56, 117, 225, 0.14);
-      transform: scale(1.01);
+    .profile {
+      flex: 1 1 270px;
+      background: var(--side-bg);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      padding: 42px 28px 42px 32px;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--side-shadow);
     }
-    h1 {
-      font-size: 2.3rem;
+    .profile h1 {
+      font-size: 2.1rem;
       font-weight: 700;
-      margin-bottom: 6px;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
+      margin-bottom: 9px;
     }
-    .lead {
-      font-size: 1.17rem;
-      color: #444;
-      margin-bottom: 6px;
+    .profile .meta {
+      color: #555;
+      font-size: 1.08rem;
+      margin-bottom: 24px;
     }
-    .meta {
-      color: #666;
+    .profile .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .profile .contact-info a,
+    .profile .contact-info .contact-row {
       font-size: 1rem;
-      margin-bottom: 10px;
+      color: #0071e3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: color .28s;
     }
-    h2 {
-      font-size: 1.19rem;
+    .profile .contact-info a:hover {
       color: #223;
+    }
+    .profile .languages, .profile .interests {
+      margin-top: 28px;
+      font-size: 1rem;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .profile .languages span,
+    .profile .interests span {
+      padding: 5px 14px;
+      background: #eef3fb;
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+    .main-section {
+      flex: 2 1 0;
+      padding: 48px 36px 48px 24px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 38px;
+    }
+    .card {
+      background: none;
+      padding: 0;
+      margin-bottom: 0;
+    }
+    .card h2 {
+      font-size: 1.18rem;
       font-weight: 600;
-      border-left: 4px solid #eee;
-      padding-left: 12px;
-      margin-bottom: 15px;
-      margin-top: 0;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
       letter-spacing: 0.01em;
     }
-    .card ul {
-      margin-top: 7px;
-      margin-bottom: 8px;
-      padding-left: 14px;
-      line-height: 1.7;
-      color: #333;
-      font-size: 1rem;
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 23px;
     }
-    .skills, .languages, .personal {
+    .experience-item {
+      background: #f8fafd;
+      border-radius: 10px;
+      padding: 17px 21px;
+      box-shadow: var(--side-shadow);
+      transition: box-shadow .33s;
+    }
+    .experience-item:hover {
+      box-shadow: 0 8px 28px rgba(56,117,225,0.10);
+    }
+    .exp-title {
+      font-weight: 500;
+      color: #223;
+      margin-bottom: 4px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .exp-meta {
+      font-size: .97rem;
+      color: #567;
+      margin-bottom: 6px;
+    }
+    .exp-details {
+      color: #333;
+      font-size: .98rem;
+      padding-left: 6px;
+      margin-bottom: 0;
+      margin-top: 6px;
+    }
+    .skills-list, .personal-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 6px;
+      margin-bottom: 0;
       list-style: none;
       padding: 0;
     }
-    .skills li, .personal li {
+    .skills-list li, .personal-list li {
+      padding: 7px 19px;
       background: #eef2f7;
       border-radius: 6px;
-      padding: 7px 20px;
-      font-size: 0.98rem;
+      font-size: .98rem;
       color: #223;
+      margin-bottom: 4px;
+      box-sizing: border-box;
     }
-    .languages li {
-      background: #e3eaf1;
-      border-radius: 6px;
-      padding: 7px 20px;
-      font-size: 0.98rem;
-      color: #223;
+    @media (max-width: 960px) {
+      .container {
+        flex-direction: column;
+        box-shadow: none;
+        border-radius: var(--border-radius);
+        margin: 18px 6px;
+      }
+      .profile {
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        min-width: unset;
+        padding: 33px 16px 17px 16px;
+        box-shadow: none;
+      }
+      .main-section {
+        padding: 31px 12px 25px 12px;
+      }
     }
-    .interests {
-      color: #555;
-      font-size: 1rem;
+    @media (max-width: 600px) {
+      .nav {
+        padding-left: 12px;
+        flex-wrap: wrap;
+      }
+      .profile, .main-section {
+        padding: 21px 6px;
+      }
+      .container {
+        margin: 0 0 12px 0;
+      }
     }
-    .contact a {
-      color: #0071e3;
-      text-decoration: none;
-      margin-right: 18px;
-      font-weight: 500;
-      transition: color var(--transition);
-    }
-    .contact a:hover {
-      color: #223;
-      text-decoration: underline;
-    }
-    @media (max-width: 769px) {
-      .container { padding: 0 4vw 48px 4vw; }
-      h1 { font-size: 1.35rem; }
-      .card { padding: 20px 8px; }
+    /* Icon sizes */
+    .material-symbols-rounded {
+      font-size: 1.17em;
+      vertical-align: middle;
     }
   </style>
 </head>
 <body>
   <nav class="nav">
-    <a href="#about" class="active">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" class="active"><span class="material-symbols-rounded">person</span> About</a>
+    <a href="#experience"><span class="material-symbols-rounded">work</span> Experience</a>
+    <a href="#skills"><span class="material-symbols-rounded">school</span> Skills</a>
+    <a href="#contact"><span class="material-symbols-rounded">mail</span> Contact</a>
   </nav>
   <div class="container">
 
-    <section id="about" class="section">
-      <div class="card">
-        <h1>Gustavo Caldas de Souza</h1>
-        <div class="meta">Montreal, Canada · Programming Analyst Student · Software Engineer</div>
-        <p class="lead">Driven by technical curiosity, I blend software engineering experience with academic achievement to deliver meaningful digital solutions.<br>
-        Passionate about problem-solving, collaboration, and learning new technologies.</p>
-        <h2>Summary</h2>
+    <aside class="profile" id="about">
+      <h1>Gustavo Caldas de Souza</h1>
+      <div class="meta">Programming Analyst Student<br>Montreal, Canada</div>
+      <div class="contact-info">
+        <div class="contact-row"><span class="material-symbols-rounded">call</span> +1 438-835-2352</div>
+        <a href="mailto:Gustavo.caldas.souza@hotmail.com"><span class="material-symbols-rounded">mail</span> Email</a>
+        <a href="https://www.linkedin.com/in/gustavo-caldas-souza" target="_blank"><span class="material-symbols-rounded">link</span> LinkedIn</a>
+        <a href="https://github.com/GustavoCaldasSouza" target="_blank"><span class="material-symbols-rounded">code</span> GitHub</a>
+      </div>
+      <div class="languages" style="margin-top:24px;">
+        <span><span class="material-symbols-rounded">language</span> English (Fluent)</span>
+        <span><span class="material-symbols-rounded">language</span> Portuguese (Native)</span>
+        <span><span class="material-symbols-rounded">translate</span> French (Intermediate)</span>
+      </div>
+      <div class="interests" style="margin-top:16px;">
+        <span><span class="material-symbols-rounded">restaurant</span> Cooking</span>
+        <span><span class="material-symbols-rounded">flight</span> Traveling</span>
+        <span><span class="material-symbols-rounded">stadia_controller</span> Gaming</span>
+        <span><span class="material-symbols-rounded">menu_book</span> Reading</span>
+      </div>
+    </aside>
+
+    <main class="main-section">
+      <section class="card">
+        <h2><span class="material-symbols-rounded">description</span> Summary</h2>
         <p>
-          Student at LaSalle College’s Programming Analyst program, seeking an internship to apply and expand my software development skills. Over three years of professional experience in engineering, analysis, and optimization for financial, insurance, and global enterprises. Eager to contribute and grow in dynamic team environments.
+          Currently studying Programming Analyst at LaSalle College, seeking an internship to apply and expand my skills in software development. With over three years' experience, I contribute strengths in problem-solving, time management, and teamwork within fast-paced, technical environments.
         </p>
-        <h2>Education & Certification</h2>
+        <h2><span class="material-symbols-rounded">school</span> Education & Certification</h2>
         <ul>
-          <li>AEC – Information Technology Programmer-Analyst, LaSalle College, Montreal (2024 – Present)</li>
-          <li>Bachelor of Computer Science, Anhembi Morumbi University, São Paulo (2019 – 2023)</li>
-          <li>IT Essentials, Cisco Networking Academy (2025)</li>
-          <li>Google Cloud Certified Associate Cloud Engineer (2022)</li>
+          <li>AEC – Information Technology Programmer-Analyst, LaSalle College, Montreal <i>(2024 – Present)</i></li>
+          <li>Bachelor of Computer Science, Anhembi Morumbi University, São Paulo <i>(2019 – 2023)</i></li>
+          <li>IT Essentials, Cisco Networking Academy <i>(2025)</i></li>
+          <li>Google Cloud Certified Associate Cloud Engineer <i>(2022)</i></li>
         </ul>
-      </div>
-    </section>
+      </section>
 
-    <section id="experience" class="section">
-      <div class="card">
-        <h2>Professional Experience</h2>
-        <div>
-          <b>Software Engineer — Western Union</b>
-          <div class="meta">Sao Paulo, Brazil · 2024</div>
-          <ul>
-            <li>Analyzed global SQL reports to identify trends and inform strategy.</li>
-            <li>Implemented new features and business rules, optimizing systems for changing needs.</li>
-            <li>Resolved production bugs, boosting stability and efficiency.</li>
-            <li>Presented weekly results in stakeholder meetings, driving transparent decisions.</li>
-          </ul>
+      <section id="experience" class="card">
+        <h2><span class="material-symbols-rounded">work</span> Professional Experience</h2>
+        <div class="experience-list">
+          <div class="experience-item">
+            <div class="exp-title"><span class="material-symbols-rounded">business_center</span> Software Engineer — Western Union</div>
+            <div class="exp-meta">Sao Paulo, Brazil · 2024</div>
+            <ul class="exp-details">
+              <li>Generated and analyzed SQL reports to monitor global performance and trends.</li>
+              <li>Implemented features and business rules, enhancing system functionality.</li>
+              <li>Diagnosed and resolved bugs, maintaining system efficiency.</li>
+              <li>Presented results in weekly stakeholder meetings for informed decisions.</li>
+            </ul>
+          </div>
+          <div class="experience-item">
+            <div class="exp-title"><span class="material-symbols-rounded">business_center</span> Software Engineer — Beneva Insurance & Financial Services</div>
+            <div class="exp-meta">Quebec City, Canada · 2023</div>
+            <ul class="exp-details">
+              <li>Created PL/SQL scripts ensuring data accuracy and compliance.</li>
+              <li>Automated workflows with Python, increasing efficiency.</li>
+              <li>Defined and clarified business rules in technical meetings.</li>
+            </ul>
+          </div>
+          <div class="experience-item">
+            <div class="exp-title"><span class="material-symbols-rounded">business_center</span> Software Engineer — Credit Suisse</div>
+            <div class="exp-meta">Sao Paulo, Brazil · 2021–2023</div>
+            <ul class="exp-details">
+              <li>Integrated DocuSign with internal systems.</li>
+              <li>Enhanced legacy apps (.NET, WinForms, DevExpress).</li>
+              <li>Maintained OracleDB and MSSQL for stability and scalability.</li>
+              <li>Built web solutions (.NET, RESTful APIs, HTML/CSS/JS).</li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <b>Software Engineer — Beneva Insurance & Financial Services</b>
-          <div class="meta">Quebec City, Canada · 2023</div>
-          <ul>
-            <li>Developed PL/SQL scripts for accurate, compliant data transformation.</li>
-            <li>Automated tasks using Python, reducing manual workloads.</li>
-            <li>Clarified and implemented business rules in technical team meetings.</li>
-          </ul>
-        </div>
-        <div>
-          <b>Software Engineer — Credit Suisse</b>
-          <div class="meta">Sao Paulo, Brazil · 2021–2023</div>
-          <ul>
-            <li>Integrated DocuSign services with internal systems.</li>
-            <li>Enhanced legacy applications (.NET, WinForms, DevExpress).</li>
-            <li>Managed OracleDB and MSSQL databases for performance and scale.</li>
-            <li>Built .NET web apps with RESTful APIs, HTML, CSS, JavaScript.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="skills" class="section">
-      <div class="card">
-        <h2>Technical Skills</h2>
-        <ul class="skills">
+      <section id="skills" class="card">
+        <h2><span class="material-symbols-rounded">code</span> Technical Skills</h2>
+        <ul class="skills-list">
           <li>C#</li>
           <li>.NET</li>
           <li>Python</li>
@@ -246,73 +320,39 @@
           <li>Docker</li>
           <li>Google Cloud Platform</li>
         </ul>
-        <h2>Personal Skills</h2>
-        <ul class="personal">
+        <h2><span class="material-symbols-rounded">psychology</span> Personal Skills</h2>
+        <ul class="personal-list">
           <li>Adaptability</li>
           <li>Attention to Detail</li>
           <li>Teamwork</li>
           <li>Critical Thinking</li>
           <li>Initiative</li>
         </ul>
-        <h2>Languages</h2>
-        <ul class="languages">
-          <li>English (Fluent)</li>
-          <li>Portuguese (Native)</li>
-          <li>French (Intermediate)</li>
-        </ul>
-        <h2>Interests</h2>
-        <div class="interests">
-          Cooking · Traveling · Gaming · Reading
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact" class="section">
-      <div class="card">
-        <h2>Contact</h2>
-        <div class="contact">
-          <a href="mailto:Gustavo.caldas.souza@hotmail.com">Email</a>
-          <a href="https://www.linkedin.com/in/gustavo-caldas-souza">LinkedIn</a>
-          <a href="https://github.com/GustavoCaldasSouza">GitHub</a>
+      <section id="contact" class="card">
+        <h2><span class="material-symbols-rounded">contact_mail</span> Contact</h2>
+        <div class="contact-info">
+          <a href="mailto:Gustavo.caldas.souza@hotmail.com"><span class="material-symbols-rounded">mail</span> Gustavo.caldas.souza@hotmail.com</a>
+          <div class="contact-row"><span class="material-symbols-rounded">call</span> +1 438-835-2352</div>
+          <a href="https://www.linkedin.com/in/gustavo-caldas-souza" target="_blank"><span class="material-symbols-rounded">link</span> LinkedIn</a>
+          <a href="https://github.com/GustavoCaldasSouza" target="_blank"><span class="material-symbols-rounded">code</span> GitHub</a>
         </div>
-        <div class="meta" style="margin-top:10px;">
-          Montreal, Canada · +1 438-835-2352
-        </div>
-      </div>
-    </section>
-
+      </section>
+    </main>
   </div>
   <script>
-    // Fade-in sections on scroll
-    function revealSections() {
-      const sections = document.querySelectorAll('.section');
-      const winBottom = window.scrollY + window.innerHeight;
-      sections.forEach(section => {
-        const top = section.offsetTop;
-        if (winBottom > top + 60) {
-          section.classList.add('visible');
-        }
-      });
-    }
-    window.addEventListener('scroll', revealSections);
-    window.addEventListener('DOMContentLoaded', revealSections);
-
-    // Navigation highlight
+    // Navigation highlight & smooth scroll
     document.querySelectorAll('.nav a').forEach(link => {
-      link.addEventListener('click', e => {
+      link.addEventListener('click', function(e) {
         document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
-      });
-    });
-    // Smooth scroll for navigation
-    document.querySelectorAll('.nav a').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const id = link.getAttribute('href').substring(1);
+        e.target.classList.add('active');
+        const id = this.getAttribute('href').substr(1);
         const el = document.getElementById(id);
         if (el) {
+          e.preventDefault();
           window.scrollTo({
-            top: el.offsetTop - 20,
+            top: el.offsetTop - 16,
             behavior: 'smooth'
           });
         }
