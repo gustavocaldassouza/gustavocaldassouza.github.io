@@ -5,212 +5,319 @@
   <title>Gustavo Caldas de Souza — Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html, body {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: #fafafa;
+    :root {
+      --card-bg: #fff;
+      --focus-bg: #f5f7fa;
+      --border-radius: 16px;
+      --accent: #0071e3;
+      --shadow: 0 4px 24px rgba(112, 144, 176, 0.07);
+      --transition: 0.4s cubic-bezier(.78,.13,.15,.84);
+    }
+    body {
       margin: 0;
-      padding: 0;
+      background: #f8fafc;
+      color: #222;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    .nav {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 36px;
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+    }
+    .nav a {
+      position: relative;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color var(--transition);
+      padding-bottom: 3px;
+    }
+    .nav a.active,
+    .nav a:hover {
+      color: var(--accent);
+    }
+    .nav a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform var(--transition);
+      margin-top: 3px;
+    }
+    .nav a.active::after,
+    .nav a:hover::after {
+      transform: scaleX(1);
     }
     .container {
-      max-width: 700px;
-      margin: 60px auto;
-      background: #fff;
-      padding: 40px 36px;
-      border-radius: 18px;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.05);
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 18px 80px 18px;
+    }
+    .section {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity var(--transition), transform var(--transition);
+      margin-bottom: 42px;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 30px 26px;
+      margin-bottom: 24px;
+      transition: box-shadow var(--transition), background var(--transition), transform var(--transition);
+      will-change: box-shadow, background, transform;
+    }
+    .card:hover {
+      background: var(--focus-bg);
+      box-shadow: 0 12px 40px rgba(56, 117, 225, 0.14);
+      transform: scale(1.01);
     }
     h1 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
+      font-size: 2.3rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
     }
-    p.lead {
-      font-size: 1.25rem;
+    .lead {
+      font-size: 1.17rem;
       color: #444;
-      margin-top: 0;
-      margin-bottom: 32px;
+      margin-bottom: 6px;
     }
-    section {
-      margin-bottom: 36px;
+    .meta {
+      color: #666;
+      font-size: 1rem;
+      margin-bottom: 10px;
     }
     h2 {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: #222;
-      margin-top: 0;
-      margin-bottom: 14px;
-      letter-spacing: 0.01em;
+      font-size: 1.19rem;
+      color: #223;
+      font-weight: 600;
       border-left: 4px solid #eee;
-      padding-left: 10px;
+      padding-left: 12px;
+      margin-bottom: 15px;
+      margin-top: 0;
+      letter-spacing: 0.01em;
     }
-    .exp, .edu {
-      margin-bottom: 16px;
+    .card ul {
+      margin-top: 7px;
+      margin-bottom: 8px;
+      padding-left: 14px;
+      line-height: 1.7;
+      color: #333;
+      font-size: 1rem;
     }
-    .title {
-      font-weight: 500;
-      color: #222;
-    }
-    .subtitle {
-      font-weight: 400;
-      color: #666;
-      font-size: 0.97rem;
-    }
-    ul.skills {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .skills, .languages, .personal {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      margin-top: 10px;
+      list-style: none;
+      padding: 0;
     }
-    ul.skills li {
-      background: #f1f1f1;
+    .skills li, .personal li {
+      background: #eef2f7;
       border-radius: 6px;
-      padding: 6px 16px;
-      font-size: 0.95rem;
-      color: #222;
+      padding: 7px 20px;
+      font-size: 0.98rem;
+      color: #223;
+    }
+    .languages li {
+      background: #e3eaf1;
+      border-radius: 6px;
+      padding: 7px 20px;
+      font-size: 0.98rem;
+      color: #223;
+    }
+    .interests {
+      color: #555;
+      font-size: 1rem;
     }
     .contact a {
-      color: #222;
+      color: #0071e3;
       text-decoration: none;
-      margin-right: 22px;
+      margin-right: 18px;
       font-weight: 500;
+      transition: color var(--transition);
     }
-    .languages, .interests {
-      color: #444;
-      font-size: 0.97rem;
+    .contact a:hover {
+      color: #223;
+      text-decoration: underline;
     }
     @media (max-width: 769px) {
-      .container {
-        margin: 28px 8px;
-        padding: 16px 6vw;
-      }
-      h1 {
-        font-size: 1.8rem;
-      }
+      .container { padding: 0 4vw 48px 4vw; }
+      h1 { font-size: 1.35rem; }
+      .card { padding: 20px 8px; }
     }
   </style>
 </head>
 <body>
+  <nav class="nav">
+    <a href="#about" class="active">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
   <div class="container">
-    <section class="header">
-      <h1>Gustavo Caldas de Souza</h1>
-      <p class="lead">Programming Analyst student. Software engineer with over three years of experience in developing, analyzing, and optimizing systems and data solutions.</p>
-    </section>
 
-    <section>
-      <h2>Contact</h2>
-      <div class="contact">
-        <a href="mailto:Gustavo.caldas.souza@hotmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/gustavo-caldas-souza">LinkedIn</a>
-        <a href="https://github.com/GustavoCaldasSouza">Github</a>
-      </div>
-      <div style="margin-top:8px;color:#555;">Montreal, Canada · +1 438-835-2352</div>
-    </section>
-
-    <section>
-      <h2>Summary</h2>
-      <p>
-        Student in the Programming Analyst program at LaSalle College, seeking an internship to apply and deepen skills in software development. Strong foundation in problem-solving, teamwork, and time management. Eager to contribute technical knowledge and gain further industry experience.
-      </p>
-    </section>
-    
-    <section>
-      <h2>Education</h2>
-      <div class="edu">
-        <span class="title">AEC – Information Technology Programmer-Analyst</span><br>
-        <span class="subtitle">LaSalle College · Montreal, QC · 2024 – Present</span>
-      </div>
-      <div class="edu">
-        <span class="title">Bachelor of Computer Science</span><br>
-        <span class="subtitle">Anhembi Morumbi University · São Paulo, Brazil · 2019 – 2023</span>
-      </div>
-      <div class="edu">
-        <span class="title">IT Essentials</span><br>
-        <span class="subtitle">Cisco Networking Academy · 2025</span>
-      </div>
-      <div class="edu">
-        <span class="title">Google Cloud Certified Associate Cloud Engineer</span><br>
-        <span class="subtitle">Google · 2022</span>
-      </div>
-    </section>
-
-    <section>
-      <h2>Professional Experience</h2>
-      <div class="exp">
-        <span class="title">Software Engineer — Western Union</span><br>
-        <span class="subtitle">Sao Paulo, Brazil · 2024</span>
+    <section id="about" class="section">
+      <div class="card">
+        <h1>Gustavo Caldas de Souza</h1>
+        <div class="meta">Montreal, Canada · Programming Analyst Student · Software Engineer</div>
+        <p class="lead">Driven by technical curiosity, I blend software engineering experience with academic achievement to deliver meaningful digital solutions.<br>
+        Passionate about problem-solving, collaboration, and learning new technologies.</p>
+        <h2>Summary</h2>
+        <p>
+          Student at LaSalle College’s Programming Analyst program, seeking an internship to apply and expand my software development skills. Over three years of professional experience in engineering, analysis, and optimization for financial, insurance, and global enterprises. Eager to contribute and grow in dynamic team environments.
+        </p>
+        <h2>Education & Certification</h2>
         <ul>
-          <li>Generated and analyzed global reports using SQL to monitor performance and identify trends.</li>
-          <li>Implemented business rules and new features to align systems with evolving requirements.</li>
-          <li>Diagnosed and resolved production bugs, maintaining system stability and efficiency.</li>
-          <li>Presented results in stakeholder meetings, driving transparent decision-making.</li>
-        </ul>
-      </div>
-      <div class="exp">
-        <span class="title">Software Engineer — Beneva Insurance & Financial Services</span><br>
-        <span class="subtitle">Quebec City, Canada · 2023</span>
-        <ul>
-          <li>Developed PL/SQL scripts for data transformation and compliance.</li>
-          <li>Automated routine tasks using Python, improving efficiency.</li>
-          <li>Participated in technical team meetings to define and clarify product rules.</li>
-        </ul>
-      </div>
-      <div class="exp">
-        <span class="title">Software Engineer — Credit Suisse</span><br>
-        <span class="subtitle">Sao Paulo, Brazil · 2021 – 2023</span>
-        <ul>
-          <li>Developed and integrated DocuSign services into internal systems.</li>
-          <li>Maintained legacy software (.NET, WinForms, DevExpress).</li>
-          <li>Worked on databases (OracleDB, MSSQL) for performance and scalability.</li>
-          <li>Built web solutions using .NET, RESTful APIs, HTML, CSS, and JavaScript.</li>
+          <li>AEC – Information Technology Programmer-Analyst, LaSalle College, Montreal (2024 – Present)</li>
+          <li>Bachelor of Computer Science, Anhembi Morumbi University, São Paulo (2019 – 2023)</li>
+          <li>IT Essentials, Cisco Networking Academy (2025)</li>
+          <li>Google Cloud Certified Associate Cloud Engineer (2022)</li>
         </ul>
       </div>
     </section>
 
-    <section>
-      <h2>Technical Skills</h2>
-      <ul class="skills">
-        <li>C#</li>
-        <li>.NET</li>
-        <li>Python</li>
-        <li>SQL (OracleDB, MSSQL, PL/SQL)</li>
-        <li>HTML/CSS/JavaScript/TypeScript</li>
-        <li>RESTful APIs</li>
-        <li>WinForms</li>
-        <li>WebForms</li>
-        <li>DevExpress</li>
-        <li>Git</li>
-        <li>Docker</li>
-        <li>Google Cloud Platform</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Personal Skills</h2>
-      <ul class="skills">
-        <li>Adaptability</li>
-        <li>Attention to Detail</li>
-        <li>Teamwork</li>
-        <li>Critical Thinking</li>
-        <li>Initiative</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Languages</h2>
-      <div class="languages">
-        English (Fluent) · Portuguese (Native) · French (Intermediate)
+    <section id="experience" class="section">
+      <div class="card">
+        <h2>Professional Experience</h2>
+        <div>
+          <b>Software Engineer — Western Union</b>
+          <div class="meta">Sao Paulo, Brazil · 2024</div>
+          <ul>
+            <li>Analyzed global SQL reports to identify trends and inform strategy.</li>
+            <li>Implemented new features and business rules, optimizing systems for changing needs.</li>
+            <li>Resolved production bugs, boosting stability and efficiency.</li>
+            <li>Presented weekly results in stakeholder meetings, driving transparent decisions.</li>
+          </ul>
+        </div>
+        <div>
+          <b>Software Engineer — Beneva Insurance & Financial Services</b>
+          <div class="meta">Quebec City, Canada · 2023</div>
+          <ul>
+            <li>Developed PL/SQL scripts for accurate, compliant data transformation.</li>
+            <li>Automated tasks using Python, reducing manual workloads.</li>
+            <li>Clarified and implemented business rules in technical team meetings.</li>
+          </ul>
+        </div>
+        <div>
+          <b>Software Engineer — Credit Suisse</b>
+          <div class="meta">Sao Paulo, Brazil · 2021–2023</div>
+          <ul>
+            <li>Integrated DocuSign services with internal systems.</li>
+            <li>Enhanced legacy applications (.NET, WinForms, DevExpress).</li>
+            <li>Managed OracleDB and MSSQL databases for performance and scale.</li>
+            <li>Built .NET web apps with RESTful APIs, HTML, CSS, JavaScript.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section>
-      <h2>Interests</h2>
-      <div class="interests">
-        Cooking, Traveling, Gaming, Reading
+    <section id="skills" class="section">
+      <div class="card">
+        <h2>Technical Skills</h2>
+        <ul class="skills">
+          <li>C#</li>
+          <li>.NET</li>
+          <li>Python</li>
+          <li>SQL (OracleDB, MSSQL, PL/SQL)</li>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>TypeScript</li>
+          <li>RESTful APIs</li>
+          <li>DevExpress</li>
+          <li>WinForms</li>
+          <li>WebForms</li>
+          <li>Git</li>
+          <li>Docker</li>
+          <li>Google Cloud Platform</li>
+        </ul>
+        <h2>Personal Skills</h2>
+        <ul class="personal">
+          <li>Adaptability</li>
+          <li>Attention to Detail</li>
+          <li>Teamwork</li>
+          <li>Critical Thinking</li>
+          <li>Initiative</li>
+        </ul>
+        <h2>Languages</h2>
+        <ul class="languages">
+          <li>English (Fluent)</li>
+          <li>Portuguese (Native)</li>
+          <li>French (Intermediate)</li>
+        </ul>
+        <h2>Interests</h2>
+        <div class="interests">
+          Cooking · Traveling · Gaming · Reading
+        </div>
       </div>
     </section>
+
+    <section id="contact" class="section">
+      <div class="card">
+        <h2>Contact</h2>
+        <div class="contact">
+          <a href="mailto:Gustavo.caldas.souza@hotmail.com">Email</a>
+          <a href="https://www.linkedin.com/in/gustavo-caldas-souza">LinkedIn</a>
+          <a href="https://github.com/GustavoCaldasSouza">GitHub</a>
+        </div>
+        <div class="meta" style="margin-top:10px;">
+          Montreal, Canada · +1 438-835-2352
+        </div>
+      </div>
+    </section>
+
   </div>
+  <script>
+    // Fade-in sections on scroll
+    function revealSections() {
+      const sections = document.querySelectorAll('.section');
+      const winBottom = window.scrollY + window.innerHeight;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        if (winBottom > top + 60) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('DOMContentLoaded', revealSections);
+
+    // Navigation highlight
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+    // Smooth scroll for navigation
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const id = link.getAttribute('href').substring(1);
+        const el = document.getElementById(id);
+        if (el) {
+          window.scrollTo({
+            top: el.offsetTop - 20,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
